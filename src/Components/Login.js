@@ -1,14 +1,19 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { setLoginInfo, logoutUser, sendingInfo } from '../reducers/loginReducer'
-import { axiosWithAuth } from '../Axios/loginAxios.js'
+import { axiosWithAuth } from '../actionCreators.js/loginCreator.js'
+import { useNavigate } from 'react-router-dom'
+import {tryLogin} from '../actionCreators.js/loginCreator.js'
 
-// still need to use axios with auth, also save token to local storage. 
 
 const Login = () => {
 
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 	const getLogin = useSelector( (state) => state.login )
+	const loginStatus = useSelector((state) => state.login.isLoggedIn);
+	const userName = useSelector( (state) => state.login.userName )
+	const password = useSelector((state) => state.login.password);
 
 	const formStyle = {
 		display: 'flex',
@@ -40,10 +45,30 @@ const Login = () => {
 		dispatch(setLoginInfo(payload))
 	}
 
-	const onSubmit = (e) => {
+
+	const onSubmit = async (e) => {
 		e.preventDefault()
-		dispatch(sendingInfo());
+		try {
+			await dispatch(tryLogin(userName, password))
+			console.log('Im in the middle: ',loginStatus)
+			
+		} catch{
+			console.log('error in the submit')
+		}
+			redirect(loginStatus);
 	}
+
+
+		const redirect = (loginStatus) => {
+			// console.log('basic login info: ', getLogin)
+			console.log('Login Status Is: ', loginStatus);
+
+			if (loginStatus) {
+				navigate('friends-list');
+			} else {
+				console.log('sorry wrong info submitted');
+			}
+		};
 
 
 	return (

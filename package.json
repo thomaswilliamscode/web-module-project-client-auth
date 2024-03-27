@@ -46,6 +46,7 @@
     "react-dom": "18.2.0",
     "react-redux": "^9.1.0",
     "react-router-dom": "6.3.0",
+    "redux-thunk": "^3.1.0",
     "style-loader": "3.3.1",
     "styled-components": "5.3.5",
     "webpack-cli": "4.10.0"

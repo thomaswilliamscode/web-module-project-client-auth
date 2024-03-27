@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { tryLogin } from '../Axios/loginAxios.js';
+import axios from 'axios';
+// import { tryLogin } from '../Axios/loginAxios.js';
 
 const initialState = {
 	userName: null,
@@ -29,12 +30,20 @@ const loginSlice = createSlice({
 		},
 		sendingInfo(state) {
 			state.sendingInfo = true;
-			tryLogin(state.userName, state.password)
-			state.sendingInfo = false;
 
+		}, loginUser(state) {
+			console.log('Inside the login user Reducer')
+			state.isLoggedIn = true;
+			console.log('State is: ', state.isLoggedIn)
+
+		}, doneSendingInfo(state) {
+			state.sendingInfo = false;
 		}
 	},
 });
 
-export const { setLoginInfo, logoutUser, sendingInfo } = loginSlice.actions
+export const { setLoginInfo, logoutUser, sendingInfo, loginUser, doneSendingInfo } = loginSlice.actions
+
+
+
 export default loginSlice.reducer;

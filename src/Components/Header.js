@@ -27,8 +27,8 @@ const Header = () => {
 			<h2>Friends DataBase</h2>
 			<div style={aStyle}>
 				<button><Link to='/login'>Login</Link></button>
-				<button><Link to='/friendlist'>FriendList</Link></button>
-				<button><Link to='/addfriend'>AddFriend</Link></button>
+				<button><Link to='/friends-list'>FriendList</Link></button>
+				<button><Link to='/add-friend'>AddFriend</Link></button>
 				<button><Link to='/logout'>LogOut</Link></button>
 			</div>
 		</div>
