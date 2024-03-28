@@ -4,6 +4,7 @@ import { setLoginInfo, logoutUser, sendingInfo } from '../reducers/loginReducer'
 import { axiosWithAuth } from '../actionCreators.js/loginCreator.js'
 import { useNavigate } from 'react-router-dom'
 import {tryLogin} from '../actionCreators.js/loginCreator.js'
+import { useEffect} from 'react'
 
 
 const Login = () => {
@@ -14,6 +15,17 @@ const Login = () => {
 	const loginStatus = useSelector((state) => state.login.isLoggedIn);
 	const userName = useSelector( (state) => state.login.userName )
 	const password = useSelector((state) => state.login.password);
+
+
+
+	useEffect(() => {
+
+		if (loginStatus) {
+			navigate('/friends-list');
+		} else {
+			console.log('sorry wrong info submitted');
+		}
+	}, [loginStatus]);
 
 	const formStyle = {
 		display: 'flex',
@@ -46,29 +58,11 @@ const Login = () => {
 	}
 
 
-	const onSubmit = async (e) => {
+	const onSubmit = (e) => {
 		e.preventDefault()
-		try {
-			await dispatch(tryLogin(userName, password))
-			console.log('Im in the middle: ',loginStatus)
-			
-		} catch{
-			console.log('error in the submit')
-		}
-			redirect(loginStatus);
+		dispatch(tryLogin(userName, password))
 	}
 
-
-		const redirect = (loginStatus) => {
-			// console.log('basic login info: ', getLogin)
-			console.log('Login Status Is: ', loginStatus);
-
-			if (loginStatus) {
-				navigate('friends-list');
-			} else {
-				console.log('sorry wrong info submitted');
-			}
-		};
 
 
 	return (
