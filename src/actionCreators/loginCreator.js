@@ -4,10 +4,7 @@ import React from 'react';
 import { loginUser, sendingInfo, doneSendingInfo } from '../reducers/loginReducer.js'
 import { useNavigate } from 'react-router-dom'
 
-const baseURL = 'http://localhost:9000';
-const logIn = '/api/login';
-const logOut = '/api/logout';
-const friends = '/api/friends';
+import { baseURL, logIn } from '../utility/urlInfo.js';
 
 export const tryLogin = (userName, password ) => (dispatch) => {
 		try {

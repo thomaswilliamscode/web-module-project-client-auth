@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { setLoginInfo, logoutUser, sendingInfo } from '../reducers/loginReducer'
-import { axiosWithAuth } from '../actionCreators.js/loginCreator.js'
+import { axiosWithAuth } from '../actionCreators/loginCreator.js'
 import { useNavigate } from 'react-router-dom'
-import {tryLogin} from '../actionCreators.js/loginCreator.js'
+import {tryLogin} from '../actionCreators/loginCreator.js'
 import { useEffect} from 'react'
 
 
