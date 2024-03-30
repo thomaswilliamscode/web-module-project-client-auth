@@ -1,6 +1,4 @@
 import Axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import React from 'react';
 import { loginUser, sendingInfo, doneSendingInfo } from '../reducers/loginReducer.js'
 import { useNavigate } from 'react-router-dom'
 
@@ -15,7 +13,6 @@ export const tryLogin = (userName, password ) => (dispatch) => {
 			Axios.post(url, info)
 				.then((res) => {
 					// save token to local storage
-					console.log(res.data.token)
 					localStorage.setItem('token', res.data.token);
 					// redirect to friendsList
 					dispatch(loginUser());

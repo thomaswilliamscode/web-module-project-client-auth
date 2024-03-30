@@ -22,9 +22,7 @@ const Login = () => {
 
 		if (loginStatus) {
 			navigate('/friends-list');
-		} else {
-			console.log('sorry wrong info submitted');
-		}
+		} 
 	}, [loginStatus]);
 
 	const formStyle = {

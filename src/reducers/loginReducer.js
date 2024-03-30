@@ -30,9 +30,7 @@ const loginSlice = createSlice({
 			state.sendingInfo = true;
 
 		}, loginUser(state) {
-			console.log('Inside the login user Reducer')
 			state.isLoggedIn = true;
-			console.log('State is: ', state.isLoggedIn)
 
 		}, doneSendingInfo(state) {
 			state.sendingInfo = false;

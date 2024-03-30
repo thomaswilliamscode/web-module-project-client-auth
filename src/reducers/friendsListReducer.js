@@ -11,8 +11,7 @@ const friendsListSlice = createSlice({
 	initialState,
 	reducers: {
 		grabFriends( state, action ) {
-			console.log('In The Slice', action)
-			// state.friendsList = action
+			state.friendsList = action.payload
 		}, 
 		testing() {
 			console.log('yo we made it into our Slice')

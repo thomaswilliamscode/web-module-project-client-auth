@@ -28,7 +28,7 @@ const Header = () => {
 			<div style={aStyle}>
 				<button><Link to='/login'>Login</Link></button>
 				<button><Link to='/friends-list'>FriendList</Link></button>
-				<button><Link to='/add-friend'>AddFriend</Link></button>
+				<button><Link to='/friends-list/add'>AddFriend</Link></button>
 				<button><Link to='/logout'>LogOut</Link></button>
 			</div>
 		</div>
