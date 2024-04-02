@@ -20,7 +20,7 @@ const loginSlice = createSlice({
 			}
 			
 		}, 
-		logoutUser(state) {
+		logOutUser(state) {
 			state.userName = null
 			state.password = null
 			state.isLoggedIn = false;
@@ -38,7 +38,7 @@ const loginSlice = createSlice({
 	},
 });
 
-export const { setLoginInfo, logoutUser, sendingInfo, loginUser, doneSendingInfo } = loginSlice.actions
+export const { setLoginInfo, logOutUser, sendingInfo, loginUser, doneSendingInfo } = loginSlice.actions
 
 
 

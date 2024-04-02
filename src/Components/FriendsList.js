@@ -3,10 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { getFriends } from '../actionCreators/friendsListCreator.js'
 import { grabFriends } from '../reducers/friendsListReducer.js'
-// import { axiosWithAuth } from "../utility/axiosWithAuth.js";
-// import { testing } from '../reducers/friendsListReducer.js'
 
-// import { baseURL, friends} from '../utility/urlInfo.js'
+import { useNavigate } from 'react-router-dom';
 
 // * [ ] When the component mounts, make a call to the api retrieving all friends. Remember that this is a protected route.
 
@@ -17,33 +15,27 @@ import { grabFriends } from '../reducers/friendsListReducer.js'
 // * [ ] In your login component, add code to your submission code the ability to redirect to your friendslist component.
 
 const FriendsList = () => {
+	const navigate = useNavigate()
 
 	const dispatch = useDispatch()
 
 	const friendsList = useSelector( (state) => state.friendsList.friendsList )
+	const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
 
 	// on mount call api
 	useEffect( () => {
-		getFriends(dispatch)
+		let token = localStorage.getItem('token')
+		if(token.length > 0){
+			getFriends(dispatch);
+		}
 	}, [])
 
-	// const getFriends = () => {
-	// 	const friendUrl = baseURL + friends;
+	useEffect(() => {
+		if (!isLoggedIn) {
+			navigate('/login');
+		}
+	}, [isLoggedIn]);
 
-	// 	let header = axiosWithAuth();
-
-	// 	header
-	// 		.get(friendUrl)
-	// 		.then((res) => {
-	// 			console.log('In the Axios Call', res.data);
-	// 			grabFriends();
-	// 			dispatch(testing())
-	// 			console.log('after testing');
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log(err);
-	// 		});
-	// };
 
 	return (
 		<div>

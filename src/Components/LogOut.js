@@ -1,25 +1,36 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
-import { useDispatch, } from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
 
 import logOutAxios from '../actionCreators/logOutCreator.js'
 import { logOut } from '../reducers/logOutReducer.js'
+import { useNavigate } from 'react-router-dom';
+
+import { logOutUser } from '../reducers/loginReducer.js'
 
 
-// redirect every page when no token available
+
+// redirect FriendList, AddFriend, LogOut page  to logIn page when no token available
 
 const LogOut = () => {
 
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
+
+	const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+
+
+	useEffect(() => {
+		if (!isLoggedIn) {
+			navigate('/login');
+		}
+	}, [isLoggedIn]);
 
 	const onClick = () => {
-		// - **[POST]** * to `/api/logout`: removes a token from active use. Returns the inactive token.
 		logOutAxios()
 		dispatch(logOut())
-
-		// erase token from localStorage
-
-
+		dispatch(logOutUser())
+		// navigate('/login')
 	}
 
 

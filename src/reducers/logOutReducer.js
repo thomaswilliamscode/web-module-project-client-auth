@@ -9,7 +9,11 @@ const logOutSlice = createSlice({
 	initialState,
 	reducers: {
 		logOut(state) {
-			console.log('Inside the slice')
+			localStorage.setItem('token', '')
+			state.isLoggedIn = false;
+		}, 
+		logIn(state) {
+			state.isLoggedIn = true;
 		}
 	}
 })

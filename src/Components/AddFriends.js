@@ -5,14 +5,26 @@ import { stateUpdate, friendCheck, resetValues } from '../reducers/addFriendsRed
 import  sendFriendData from '../actionCreators/addFriendsCreator.js'
 
 import { formStyle, formItem, inputStyle } from '../Styles/styles.js';
+import Login from './Login';
+
+import { useNavigate } from 'react-router-dom';
+
 
 
 const AddFriends = () => {
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 
 	const isValid = useSelector((state) => state.addFriends.isValid);
 	const nameValue = useSelector((state) => state.addFriends.name);
 	const emailValue = useSelector((state) => state.addFriends.email);
+	const isLoggedIn = useSelector( (state) => state.login.isLoggedIn )
+
+	useEffect( () => {
+		if (!isLoggedIn) {
+			navigate('/login')
+		}
+	}, [isLoggedIn])
 
 
 
