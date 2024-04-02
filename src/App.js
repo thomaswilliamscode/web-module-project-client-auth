@@ -5,6 +5,7 @@ import Header from './Components/Header'
 import Login from './Components/Login';
 import FriendsList from './Components/FriendsList'
 import AddFriends from './Components/AddFriends'
+import LogOut from './Components/LogOut'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
 				<Route path='/' element={<Login />} />
 				<Route path='/friends-list' element={<FriendsList />} />
 				<Route path='/friends-list/add' element={<AddFriends />} />
+				<Route path='/logout' element={<LogOut />} />
 			</Routes>
 		</div>
 	);

@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import {tryLogin} from '../actionCreators/loginCreator.js'
 import { useEffect} from 'react'
 
+import { formStyle, formItem, inputStyle} from '../Styles/styles.js'
+
 
 const Login = () => {
 
@@ -25,22 +27,7 @@ const Login = () => {
 		} 
 	}, [loginStatus]);
 
-	const formStyle = {
-		display: 'flex',
-		flexDirection: 'column',
-		justifyContent: 'center',
-		alignItems: 'center',
-	};
-
-	const formItem = {
-		width: '50%',
-	};
-
-	const inputStyle = {
-		width: '50%',
-		marginBottom: '10px',
-	};
-
+	
 	const onChange = (e) => {
 		const {id, value} = e.target
 		let userName= ''

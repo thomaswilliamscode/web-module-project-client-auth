@@ -1,14 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { stateUpdate } from '../reducers/addFriendsReducer.js'
-import sendFriendData from '../actionCreators/addFriendsCreator.js'
+import { stateUpdate, friendCheck, resetValues } from '../reducers/addFriendsReducer.js'
+import  sendFriendData from '../actionCreators/addFriendsCreator.js'
+
+import { formStyle, formItem, inputStyle } from '../Styles/styles.js';
 
 
 const AddFriends = () => {
 	const dispatch = useDispatch()
 
-	const data= useSelector( (state) => state.addFriends )
+	const isValid = useSelector((state) => state.addFriends.isValid);
+	const nameValue = useSelector((state) => state.addFriends.name);
+	const emailValue = useSelector((state) => state.addFriends.email);
+
 
 
 	const onChange = (e) => {
@@ -19,32 +24,48 @@ const AddFriends = () => {
 	}
 
 	const onSubmit = (e) => {
-		e.preventDefault()
-		// post new friend to api 
-		sendFriendData(data)
-	
-	}
+		e.preventDefault();
+		dispatch(friendCheck());
+		if (isValid) {
+			const data = {
+				name: nameValue,
+				email: emailValue,
+			};
+			sendFriendData(data)
+			dispatch(resetValues())
+		}
 
+		// sendFriendData(data)
+	}
 
 
 
 	return (
 		<>
 			<h1> In Add Friends Component</h1>
-			<form onSubmit={onSubmit}>
-				<label htmlFor='name'>
+			{isValid ? null : 'Please Input Name & Email'}
+			<form onSubmit={onSubmit} style={formStyle}>
+				<label htmlFor='name' style={formItem}>
 					Friend Name
 				</label>
-				<input type='text' id='name' onChange={onChange}>
-				
-				</input>
+				<input
+					type='text'
+					id='name'
+					onChange={onChange}
+					style={inputStyle}
+					value={nameValue}
+				></input>
 
-				<label htmlFor='email'>
+				<label htmlFor='email' style={formItem}>
 					Friend Email
 				</label>
-				<input type='email' id='email' onChange={onChange}>
-				
-				</input>
+				<input
+					type='email'
+					id='email'
+					onChange={onChange}
+					style={inputStyle}
+					value={emailValue}
+				></input>
 
 				<button type='submit'>Submit</button>
 			</form>
